@@ -4,6 +4,7 @@ menu:
   Archives: /archives
   About: /about/me.html
 rss: /atom.xml
+banner: images/banner.jpg
 
 # Content
 excerpt_link: Read More
