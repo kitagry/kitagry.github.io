@@ -5,7 +5,7 @@ date: 2019-11-01 17:55:37
 
 <br />
 
-<img src="/icon.jpg" align="left" style="margin-right: 10px;">
+<img src="/css/images/icon.jpg" align="left" style="margin-right: 10px;">
 
 **名前**
 北川 亮
