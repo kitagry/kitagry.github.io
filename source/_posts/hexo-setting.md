@@ -165,6 +165,7 @@ before_install:
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
 script:
+- hexo generate
 - hexo deploy
 ```
 
@@ -175,7 +176,7 @@ script:
 `before_install`は以下の `script`の前に実行されます。
 
 最後に `script`についてです。といってもこれについては解説する意味もなさそうですね。笑
-ただ、deployを行うだけです。
+ただ、hemlにコンパイルを行い、それらをdeployするだけです。
 
 
 ## 自動デプロイしてみる
