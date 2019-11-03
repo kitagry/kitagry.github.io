@@ -6,6 +6,8 @@ cache: npm
 branches:
   only:
   - deploy
+env:
+- GIT_SSH_COMMAND="ssh -i deploy_key -F /dev/null"
 before_install:
 - openssl aes-256-cbc -K $encrypted_3aae978f1794_key -iv $encrypted_3aae978f1794_iv -in deploy_key.enc -out deploy_key -d
 script:
