@@ -98,3 +98,22 @@ deploy:
   type: git
   repo: git@github.com:kitagry/kitagry.github.io.git
   branch: master
+
+sitemap:
+  path: sitemap
+  tag: false
+  category: false
+
+robotstxt:
+  useragent: "*"
+  disallow:
+    - /about/
+    - /archives/
+    - /categories/
+    - /css/
+    - /galley/
+    - /images/
+    - /js/
+    - /tags/
+  allow:
+  sitemap: /sitemap.xml
