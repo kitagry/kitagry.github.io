@@ -78,18 +78,26 @@ languages:
 ```
 
 これで両立可能です！
+以下の画像が実際の様子です。
+関数の`Hello`と`hello`がタイポしているので起こっているエラーがgoplsのエラーです。
+`Hello`という公開関数に対してコメントを書きなさいと怒られているエラーがgolintのエラーです。
+ちゃんと設定できてますね！
+
+<img src="/css/images/efm-langserver.png" alt="" align="left" style="max-height: 500px;">
+<br style="clear:left;">
+
 これで終わりでもいいのですが、efm-langserverについての補足を少しだけします。
 
 ### linterのexitステータスは1である必要がある
 
 efm-langserverはexistステータスに以上がある場合にエラーをlinterの内容を出力する設定になっています。
-`golint`は何故かexit statusがデフォルトだと0になるようになっているみたいなので、`-set_exit_status=1`というように指定する必要があります。
+`golint`は何故かexitステータスがデフォルトだと0になるようになっているみたいなので、`-set_exit_status=1`というように指定する必要があります。
 
 ### lint-formatsを設定する
 
 lint-formatsはefm-langserverの設定でデフォルトだと、`%f:%l:%m`と`%f:%l:%c:%m`の2つが設定されています。
 この2つでパースするとgolintは両方の設定に成功してしまします。
-そして、Diagnosticsが2つ送られて来てしまい、ちょっとめんどくさいです。
+そして、Diagnosticsが2つ送られて来てしまい、Diagnosticsが２つ存在してしまいます。
 なので、`lint-formats:`で正しい方のフォーマットを指定しました。
 
 ちなみに、エラーformatは[Vimのエラーフォーマット構文](https://vim-jp.org/vimdoc-en/quickfix.html#error-file-format)を使っているみたいなので、こちらを参考にしてください。
