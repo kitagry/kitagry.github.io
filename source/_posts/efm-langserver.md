@@ -105,3 +105,18 @@ lint-formatsはefm-langserverの設定でデフォルトだと、`%f:%l:%m`と`%
 ## まとめ
 
 goでgoplsの他にgolintのエラーも出るようになった！
+
+#### ( 2019/12/06 追記
+
+11月末に取り込まれた[変更](https://github.com/mattn/efm-langserver/commit/0bbc17debeaa88e224817d6364cb8d5b0c8f388f)によってexitステータスが0でも行けるようになりました。
+その場合以下のような設定でいけます。
+
+```yaml
+languages:
+  go:
+    lint-command: 'golint'
+    lint-ignore-exit-code: true
+    lint-formats:
+      - '%f:%l:%c:%m'
+```
+
