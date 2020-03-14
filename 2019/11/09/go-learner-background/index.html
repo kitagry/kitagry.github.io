@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="Iqyah4o7ze_hipFI-DwLiCVULILTufCa8iPTZ0Ti0ro" />
+  
+
+  
+  <title>読書内容を覚えるためのライフハック作った | kitagry&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="僕はライフハックが結構好きで、自分でも色々考えてはあれやこれやと試したりしてます。今回はその中でプログラミングを用いたライフハックが今の所結構いい感じなのでブログにしたためようと思います。 作ったものの背景僕はかなり読書が好きで、しばしば自分の貯金を圧迫するほど本を買ったりしています。しかし、長年の悩みとして本で読んだことをすぐに忘れてしまうということがありました。様々な本を読んでも同じ悩みを持っ">
+<meta name="keywords" content="読書,ライフハック">
+<meta property="og:type" content="article">
+<meta property="og:title" content="読書内容を覚えるためのライフハック作った">
+<meta property="og:url" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;2019&#x2F;11&#x2F;09&#x2F;go-learner-background&#x2F;index.html">
+<meta property="og:site_name" content="kitagry&#39;s blog">
+<meta property="og:description" content="僕はライフハックが結構好きで、自分でも色々考えてはあれやこれやと試したりしてます。今回はその中でプログラミングを用いたライフハックが今の所結構いい感じなのでブログにしたためようと思います。 作ったものの背景僕はかなり読書が好きで、しばしば自分の貯金を圧迫するほど本を買ったりしています。しかし、長年の悩みとして本で読んだことをすぐに忘れてしまうということがありました。様々な本を読んでも同じ悩みを持っ">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;css&#x2F;images&#x2F;go-learner&#x2F;go-learner-example.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;css&#x2F;images&#x2F;go-learner&#x2F;spread-sheet.png">
+<meta property="og:updated_time" content="2019-11-10T09:18:30.305Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;css&#x2F;images&#x2F;go-learner&#x2F;go-learner-example.png">
+<meta name="twitter:creator" content="@kitagry">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kitagry&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="検索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kitagry.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-go-learner-background" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/09/go-learner-background/" class="article-date">
+  <time datetime="2019-11-09T05:49:03.000Z" itemprop="datePublished">2019-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      読書内容を覚えるためのライフハック作った
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>僕はライフハックが結構好きで、自分でも色々考えてはあれやこれやと試したりしてます。<br>今回はその中でプログラミングを用いたライフハックが今の所結構いい感じなのでブログにしたためようと思います。</p>
+<h3 id="作ったものの背景"><a href="#作ったものの背景" class="headerlink" title="作ったものの背景"></a>作ったものの背景</h3><p>僕はかなり読書が好きで、しばしば自分の貯金を圧迫するほど本を買ったりしています。<br>しかし、長年の悩みとして本で読んだことをすぐに忘れてしまうということがありました。様々な本を読んでも同じ悩みを持っている人は多いように思います。そこでは覚える方法として、2度読むとかメモを取るといった手法が提案されてたりしました。しかし、どの手法も僕にはしっくり来ませんでした。<br>そこで自分にしっくり来るようなアプリを作ってしまおうと思い立ち、作ることにしました。</p>
+<h3 id="作る上で参考にしたものや考えたこと"><a href="#作る上で参考にしたものや考えたこと" class="headerlink" title="作る上で参考にしたものや考えたこと"></a>作る上で参考にしたものや考えたこと</h3><p>今回作る上で最も参考になったのが「<a href="https://www.amazon.co.jp/dp/B07F8KZ8SJ/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1" target="_blank" rel="noopener">Learn better</a>」という本です。<br>この本はどうすれば学びを深めることが出来るのかということに焦点を当てて、科学的に書いた本です。<br>その中で僕が気になったのが検索練習という方法です。<br>検索練習とは、学んだことに対して自分に問いかけてそれを思い出すという練習方法です。</p>
+<p>検索練習が気になった理由としては以下の実験があります。<br>その実験では文章を覚えるのに、4回同じ文章を読んだグループと1回だけ文章を読んでその後3回思い出すというグループでどちらのほうが覚えているかについて数日後にテストを行いました。<br>その結果思い出す試みをしたグループの方がはるかに文章を覚えていました。<br>つまり、2度読みするより1度読んで何回か思い出すためのテストを行ったほうがよいという結果でした。</p>
+<p>また、僕も受験勉強のときは、参考書を読むよりも実際に問題を解いた方が理解が深まりやすいという実感を持っていたのも気になった理由に入ると思います。</p>
+<p>ここで、それに特化したアプリがありそうだなと思って調べたところ<a href="https://apps.ankiweb.net/" target="_blank" rel="noopener">ANKI</a>というアプリが見つかりました。<br>このアプリは忘却曲線に沿って、最適なタイミングで問題を出してくれるというアプリです。<br>僕もまあアプリをがむしゃらに作るよりは既存のものを使った方が効率的なので、ANKIを試したみました。<br>しかし、僕はこのアプリは全然長続きしませんでした。<br>毎日ANKIを開くというたった1ステップが続かなかったのです。<br>この毎日復習をするという習慣をどうにかして作る必要があります。</p>
+<p>そこで、僕は自分が<strong>毎日行っている習慣に復習を組み込む</strong>といいんじゃないか？という結論に至りました。<br>これは科学的にも証明されており、新しい習慣を作るときに既存のものに組み込むという手法はよく使われています。<br>(参考文献はまた探しておきます。)<br>それで僕は毎日行っているLINEを開くという習慣に復習を行うという行動を組み込むことにしました。<br>LINEなら毎日必ず確認するし、僕はLINEに未読のものがあるのが許せないたちなので、とりあえず問題を開くというところまでは習慣になるだろうと思いました。</p>
+<p>(ちなみに、習慣について深く知りたいという人には「<a href="https://www.amazon.co.jp/%E5%B0%8F%E3%81%95%E3%81%AA%E7%BF%92%E6%85%A3-%E3%82%B9%E3%83%86%E3%82%A3%E3%83%BC%E3%83%B4%E3%83%B3%E3%83%BB%E3%82%AC%E3%82%A4%E3%82%BA/dp/4478065772/ref=sr_1_1?adgrpid=54029394860&gclid=CjwKCAiAwZTuBRAYEiwAcr67OXKoUc1RINrkE9D0Yq1ZPfAnIsZYDEKjdPZgKcKYrgci2J-oXPW-AhoCSsUQAvD_BwE&hvadid=259564547220&hvdev=c&hvlocphy=1009507&hvnetw=g&hvpos=1t1&hvqmt=e&hvrand=4242536134617577817&hvtargid=aud-759377471933%3Akwd-349758188854&hydadcr=17958_10174825&jp-ad-ap=0&keywords=%E5%B0%8F%E3%81%95%E3%81%AA%E7%BF%92%E6%85%A3&qid=1573282015&sr=8-1" target="_blank" rel="noopener">小さな習慣</a>」という本がおすすめです)</p>
+<h3 id="作ったもの"><a href="#作ったもの" class="headerlink" title="作ったもの"></a>作ったもの</h3><p>作る工程はとりあえずさておき、下の画像が完成したものです。<br>LINEではAPIが公開されており、自分の好きなアカウントを作成することができます。<br>アイコンや背景もカスタマイズ出来ると思うんですが、めんどくさくてやってません。<br>「ガリ勉くん」という名前も適当につけました。</p>
+<img src="/css/images/go-learner/go-learner-example.png" alt="" align="left" style="max-height: 300px;">
+<br style="clear:left;">
+
+<p>僕は毎日以下のような手順で問題を解いています。</p>
+<ol>
+<li>毎朝問題がある決まりに従って出題されます。(今の所毎日5問ずつ)</li>
+<li>出題された問題に対して、自分なりの答えを考えます。</li>
+<li>「答えを見る」ボタンを押します。</li>
+<li>答えと一緒に「正解・不正解」ボタンがきます</li>
+<li>もし、自分の答えがあっていたら正解ボタン・間違っていたら不正解ボタンを押します</li>
+<li>これを全問題に対して行います。</li>
+</ol>
+<p>こうすることで、毎日ランダムに問題について思い出すことができます。<br>問題は以下のようにGoogleスプレッドシートに書いたものがランダムに出される用になっています。</p>
+<img src="/css/images/go-learner/spread-sheet.png" alt="" align="left" style="max-height: 300px;">
+<br style="clear:left;">
+
+<p>これで本を読んだときに、「これは覚えときたいなー」と思った内容をスプレッドシートに問題形式に書いておけば、毎日問題が届けられるわけです。</p>
+<h3 id="終わりに"><a href="#終わりに" class="headerlink" title="終わりに"></a>終わりに</h3><p>今回は自分がどのようなものを作ったかについて書きました。<br>現在のところ、毎日続けて問題を解いているしかなり覚えてきたなーと思うようになってきました。<br>また、スプレッドシートにまとめることで見返したときに自分結構頑張ってるなという感じがして嬉しいです。</p>
+<p>しかし、問題を出す決まり(アルゴリズム)はめちゃくちゃ適当に書いてます。<br>また、不正解ボタンを押したときに何の反応もありません。<br>不正解だったときに、もっと自分が悔しくなるような工夫を設ければもっと記憶定着率は上がる気がします。</p>
+<p>今回は一応形になりつつ、復習にもなっているのでブログにしたためてみましたが、これからもっと改良していきます。<br>また、プログラミング的な内容については後日ブログで書こうかなと思っています。</p>
+<p>もし、どういうふうにやっているか気になる人がいれば以下のリポジトリを参考に見てください。<br><a href="https://github.com/kitagry/go-learner" target="_blank" rel="noopener">https://github.com/kitagry/go-learner</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kitagry.github.io/2019/11/09/go-learner-background/" data-id="ck3oj34160000zqpgenpk4sf6" class="article-share-link">共有</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" rel="tag">ライフハック</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AA%AD%E6%9B%B8/" rel="tag">読書</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/19/efm-langserver/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          efm-langserverの設定について今更ながらやってみた(Go言語)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/03/hexo-setting/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">hexoをGitHub Pagesで使うための設定</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/" rel="tag">Github Pages</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travis/" rel="tag">travis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" rel="tag">ライフハック</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AA%AD%E6%9B%B8/" rel="tag">読書</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Github-Pages/" style="font-size: 10px;">Github Pages</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/travis/" style="font-size: 10px;">travis</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" style="font-size: 10px;">ライフハック</a> <a href="/tags/%E8%AA%AD%E6%9B%B8/" style="font-size: 20px;">読書</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">2019/12</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">2019/11</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/02/read-book-2019-11/">2019/11 読んだ本まとめ</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/efm-langserver/">efm-langserverの設定について今更ながらやってみた(Go言語)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/09/go-learner-background/">読書内容を覚えるためのライフハック作った</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/hexo-setting/">hexoをGitHub Pagesで使うための設定</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/hello-world/">ブログ作ってみた</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Ryo Kitagawa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/me.html" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

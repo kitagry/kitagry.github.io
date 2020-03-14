@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="Iqyah4o7ze_hipFI-DwLiCVULILTufCa8iPTZ0Ti0ro" />
+  
+
+  
+  <title>efm-langserverの設定について今更ながらやってみた(Go言語) | kitagry&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="efm-langserverが出たときにめっちゃ便利そうやんーと思っていたんですが、色々ハマったりして時間もなかったのでしばらく放置していましたが、ついに設定してみました。 efm-langserverとは General purpose Language Server that can use specified error message format generated from speci">
+<meta name="keywords" content="vim,LSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="efm-langserverの設定について今更ながらやってみた(Go言語)">
+<meta property="og:url" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;2019&#x2F;11&#x2F;19&#x2F;efm-langserver&#x2F;index.html">
+<meta property="og:site_name" content="kitagry&#39;s blog">
+<meta property="og:description" content="efm-langserverが出たときにめっちゃ便利そうやんーと思っていたんですが、色々ハマったりして時間もなかったのでしばらく放置していましたが、ついに設定してみました。 efm-langserverとは General purpose Language Server that can use specified error message format generated from speci">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;css&#x2F;images&#x2F;efm-langserver.png">
+<meta property="og:updated_time" content="2020-03-14T10:51:16.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;css&#x2F;images&#x2F;efm-langserver.png">
+<meta name="twitter:creator" content="@kitagry">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kitagry&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="検索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kitagry.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-efm-langserver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/efm-langserver/" class="article-date">
+  <time datetime="2019-11-19T09:35:07.000Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      efm-langserverの設定について今更ながらやってみた(Go言語)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/mattn/efm-langserver" target="_blank" rel="noopener">efm-langserver</a>が出たときにめっちゃ便利そうやんーと思っていたんですが、色々ハマったりして時間もなかったのでしばらく放置していましたが、ついに設定してみました。</p>
+<h3 id="efm-langserverとは"><a href="#efm-langserverとは" class="headerlink" title="efm-langserverとは"></a>efm-langserverとは</h3><blockquote>
+<p>General purpose Language Server that can use specified error message format generated from specified command. This is useful for editing code with linter.</p>
+</blockquote>
+<p>efm-langserverは特定のコマンドから生成されるエラーメッセージに特化したLanguage Serverです。<br>例えばlinterとかが例に入ります。</p>
+<h3 id="導入例"><a href="#導入例" class="headerlink" title="導入例"></a>導入例</h3><p>efm-langserverを導入する利点は以下のような点が挙げられると思います。</p>
+<ul>
+<li>言語のLSが存在しないが、Linterは存在する場合</li>
+<li>LSはあるが、Linterを使いたい場合</li>
+</ul>
+<p>1つ目の利用方法はefm-langserverのREADMEを見てもらえば出来ると思うので、今回は下について考えながら設定していきたいと思います。</p>
+<h3 id="なぜefm-langserverを利用するか？"><a href="#なぜefm-langserverを利用するか？" class="headerlink" title="なぜefm-langserverを利用するか？"></a>なぜefm-langserverを利用するか？</h3><p>linterのエラーを出力するプラグインとしては<a href="https://github.com/dense-analysis/ale" target="_blank" rel="noopener">ALE</a>が有名だと思います。<br>ALEはすごく便利なプラグインで、Linterさえ導入すればVimにエラー文などを出力してくれます。<br>しかし、便利な反面プラグインとして大きすぎるという欠点があります。</p>
+<p>そこで今回は<a href="https://github.com/prabirshrestha/vim-lsp" target="_blank" rel="noopener">vim-lsp</a>だけで全てが完結するような設定を目指します。</p>
+<h3 id="早速設定"><a href="#早速設定" class="headerlink" title="早速設定"></a>早速設定</h3><p>今回はGo言語の利用例について考えながらやります。<br>Go言語では<a href="https://github.com/golang/tools/tree/master/gopls" target="_blank" rel="noopener">gopls</a>というLanguage Serverを使います。<br>また、efm-langserverで使うlinterとして<a href="https://github.com/golang/lint" target="_blank" rel="noopener">golint</a>を使用します。</p>
+<p>早速設定</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">executable</span>(<span class="string">'gopls'</span>)</span><br><span class="line">    <span class="keyword">au</span> User lsp_setup <span class="keyword">call</span> lsp#register_server(&#123;</span><br><span class="line">        \ <span class="string">'name'</span>: <span class="string">'go'</span>,</span><br><span class="line">        \ <span class="string">'cmd'</span>: &#123;server_info-&gt;[<span class="string">'gopls'</span>]&#125;,</span><br><span class="line">        \ <span class="string">'whitelist'</span>: [<span class="string">'go'</span>],</span><br><span class="line">        \ <span class="string">'workspace_config'</span>: &#123;<span class="string">'gopls'</span>: &#123;</span><br><span class="line">        \     <span class="string">'usePlaceholders'</span>: <span class="variable">v:true</span>,</span><br><span class="line">        \     <span class="string">'completeUnimported'</span>: <span class="variable">v:true</span>,</span><br><span class="line">        \   &#125;&#125;,</span><br><span class="line">        \ &#125;)</span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">executable</span>(<span class="string">'efm-langserver'</span>)</span><br><span class="line">  <span class="keyword">augroup</span> LspEFM</span><br><span class="line">    au!</span><br><span class="line">    <span class="keyword">autocmd</span> User lsp_setup <span class="keyword">call</span> lsp#register_server(&#123;</span><br><span class="line">        \ <span class="string">'name'</span>: <span class="string">'efm-langserver'</span>,</span><br><span class="line">        \ <span class="string">'cmd'</span>: &#123;server_info-&gt;[<span class="string">'efm-langserver'</span>, <span class="string">'-c='</span>.$HOME.<span class="string">'/.config/efm-langserver/config.yaml'</span>, <span class="string">'-log='</span>.<span class="variable">g:log_files_dir</span>.<span class="string">'/efm-langserver.log'</span>]&#125;,</span><br><span class="line">        \ <span class="string">'whitelist'</span>: [<span class="string">'go'</span>],</span><br><span class="line">        \ &#125;)</span><br><span class="line">  <span class="keyword">augroup</span> END</span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
+
+<p>1つ目がgoplsの設定で2つ目がefm-langserverの設定です。</p>
+<p>そして、<code>~/.config/efm-langserver/config.yaml</code>に以下のような設定を行います。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">languages:</span></span><br><span class="line">  <span class="attr">go:</span></span><br><span class="line">    <span class="attr">lint-command:</span> <span class="string">'golint -set_exit_status=1'</span></span><br><span class="line">    <span class="attr">lint-formats:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">'%f:%l:%c:%m'</span></span><br></pre></td></tr></table></figure>
+
+<p>これで両立可能です！<br>以下の画像が実際の様子です。<br>関数の<code>Hello</code>と<code>hello</code>がタイポしているので起こっているエラーがgoplsのエラーです。<br><code>Hello</code>という公開関数に対してコメントを書きなさいと怒られているエラーがgolintのエラーです。<br>ちゃんと設定できてますね！</p>
+<img src="/css/images/efm-langserver.png" alt="" align="left" style="max-height: 500px;">
+<br style="clear:left;">
+
+<p>これで終わりでもいいのですが、efm-langserverについての補足を少しだけします。</p>
+<h3 id="linterのexitステータスは1である必要がある"><a href="#linterのexitステータスは1である必要がある" class="headerlink" title="linterのexitステータスは1である必要がある"></a>linterのexitステータスは1である必要がある</h3><p>efm-langserverはexistステータスに以上がある場合にエラーをlinterの内容を出力する設定になっています。<br><code>golint</code>は何故かexitステータスがデフォルトだと0になるようになっているみたいなので、<code>-set_exit_status=1</code>というように指定する必要があります。</p>
+<h3 id="lint-formatsを設定する"><a href="#lint-formatsを設定する" class="headerlink" title="lint-formatsを設定する"></a>lint-formatsを設定する</h3><p>lint-formatsはefm-langserverの設定でデフォルトだと、<code>%f:%l:%m</code>と<code>%f:%l:%c:%m</code>の2つが設定されています。<br>この2つでパースするとgolintは両方の設定に成功してしまします。<br>そして、Diagnosticsが2つ送られて来てしまい、Diagnosticsが２つ存在してしまいます。<br>なので、<code>lint-formats:</code>で正しい方のフォーマットを指定しました。</p>
+<p>ちなみに、エラーformatは<a href="https://vim-jp.org/vimdoc-en/quickfix.html#error-file-format" target="_blank" rel="noopener">Vimのエラーフォーマット構文</a>を使っているみたいなので、こちらを参考にしてください。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>goでgoplsの他にgolintのエラーも出るようになった！</p>
+<h4 id="2019-12-06-追記"><a href="#2019-12-06-追記" class="headerlink" title="( 2019/12/06 追記"></a>( 2019/12/06 追記</h4><p>11月末に取り込まれた<a href="https://github.com/mattn/efm-langserver/commit/0bbc17debeaa88e224817d6364cb8d5b0c8f388f" target="_blank" rel="noopener">変更</a>によってexitステータスが0でも行けるようになりました。<br>その場合以下のような設定でいけます。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">languages:</span></span><br><span class="line">  <span class="attr">go:</span></span><br><span class="line">    <span class="attr">lint-command:</span> <span class="string">'golint'</span></span><br><span class="line">    <span class="attr">lint-ignore-exit-code:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">lint-formats:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">'%f:%l:%c:%m'</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kitagry.github.io/2019/11/19/efm-langserver/" data-id="ck3oj341t0008zqpgal1ehl7x" class="article-share-link">共有</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSP/" rel="tag">LSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/02/read-book-2019-11/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          2019/11 読んだ本まとめ
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/09/go-learner-background/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">読書内容を覚えるためのライフハック作った</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/" rel="tag">Github Pages</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travis/" rel="tag">travis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" rel="tag">ライフハック</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AA%AD%E6%9B%B8/" rel="tag">読書</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Github-Pages/" style="font-size: 10px;">Github Pages</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/travis/" style="font-size: 10px;">travis</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" style="font-size: 10px;">ライフハック</a> <a href="/tags/%E8%AA%AD%E6%9B%B8/" style="font-size: 20px;">読書</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">2019/12</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">2019/11</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/02/read-book-2019-11/">2019/11 読んだ本まとめ</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/efm-langserver/">efm-langserverの設定について今更ながらやってみた(Go言語)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/09/go-learner-background/">読書内容を覚えるためのライフハック作った</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/hexo-setting/">hexoをGitHub Pagesで使うための設定</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/hello-world/">ブログ作ってみた</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Ryo Kitagawa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/me.html" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

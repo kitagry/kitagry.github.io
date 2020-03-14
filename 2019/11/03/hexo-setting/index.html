@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="Iqyah4o7ze_hipFI-DwLiCVULILTufCa8iPTZ0Ti0ro" />
+  
+
+  
+  <title>hexoをGitHub Pagesで使うための設定 | kitagry&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="せっかくなのでブログを1つくらい更新しようかなと思います。 現在僕はGitHub Pagesとhexoを使ってページを公開しています。まあ、探せばやり方はいくらでもあると思うのですが、意外と検索しても出てこなかったので僕の設定の備忘録として残しておきます。 hexoとは？hexoとは静的サイトジェネレーターです。基本的にはマークダウンファイルを書くだけでブログを更新できます。また、テーマなども複数">
+<meta name="keywords" content="hexo,Github Pages,travis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexoをGitHub Pagesで使うための設定">
+<meta property="og:url" content="https:&#x2F;&#x2F;kitagry.github.io&#x2F;2019&#x2F;11&#x2F;03&#x2F;hexo-setting&#x2F;index.html">
+<meta property="og:site_name" content="kitagry&#39;s blog">
+<meta property="og:description" content="せっかくなのでブログを1つくらい更新しようかなと思います。 現在僕はGitHub Pagesとhexoを使ってページを公開しています。まあ、探せばやり方はいくらでもあると思うのですが、意外と検索しても出てこなかったので僕の設定の備忘録として残しておきます。 hexoとは？hexoとは静的サイトジェネレーターです。基本的にはマークダウンファイルを書くだけでブログを更新できます。また、テーマなども複数">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-11-03T09:50:27.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@kitagry">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kitagry&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about/me.html">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="検索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kitagry.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hexo-setting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/03/hexo-setting/" class="article-date">
+  <time datetime="2019-11-03T08:15:43.000Z" itemprop="datePublished">2019-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexoをGitHub Pagesで使うための設定
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>せっかくなのでブログを1つくらい更新しようかなと思います。</p>
+<p>現在僕はGitHub Pagesとhexoを使ってページを公開しています。<br>まあ、探せばやり方はいくらでもあると思うのですが、意外と検索しても出てこなかったので僕の設定の備忘録として残しておきます。</p>
+<h3 id="hexoとは？"><a href="#hexoとは？" class="headerlink" title="hexoとは？"></a>hexoとは？</h3><p><a href="https://hexo.io" target="_blank" rel="noopener">hexo</a>とは静的サイトジェネレーターです。<br>基本的にはマークダウンファイルを書くだけでブログを更新できます。<br>また、テーマなども複数ありかなり応用が効きそうです。<br>(僕自身は現在hexo3日目なので、あまり良くわかっていませんが。。)</p>
+<h3 id="Github-Pagesについて"><a href="#Github-Pagesについて" class="headerlink" title="Github Pagesについて"></a>Github Pagesについて</h3><p><a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages</a>とはGithubにプッシュするだけでウェブサイトを表示してくれるサービスです。<br>無料でWebページが作成出来るのでかなり便利です。<br>ただし、ページを公開するための制約が何個かあります。</p>
+<ol>
+<li>静的ファイルしか公開することができない</li>
+<li>masterブランチまたはgh-pagesブランチにあるファイルを公開する</li>
+</ol>
+<p>つまり、静的ファイルを公開する場合には、サーバーやドメインを借りるという手間を削減出来るのでかなり良いと思います。</p>
+<h2 id="デプロイをするときの問題点"><a href="#デプロイをするときの問題点" class="headerlink" title="デプロイをするときの問題点"></a>デプロイをするときの問題点</h2><p>実はhexoではマークダウンで書いた後に、<code>hexo generate</code>と実行することで静的ファイルを子ディレクトリの中に作成します。そして、多くのGithub Pagesはmasterブランチの <code>/docs</code> 以下をウェブサイトとして公開することができます。つまり、hexoの <code>_config.yaml</code> を以下の用に書き換えればいいわけです。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Directory</span></span><br><span class="line"><span class="attr">source_dir:</span> <span class="string">source</span></span><br><span class="line"><span class="attr">public_dir:</span> <span class="string">docs</span>  <span class="comment"># &lt;-- ここをdocsにする</span></span><br><span class="line"><span class="attr">tag_dir:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">archive_dir:</span> <span class="string">archives</span></span><br><span class="line"><span class="attr">category_dir:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">code_dir:</span> <span class="string">downloads/code</span></span><br><span class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span></span><br><span class="line"><span class="attr">skip_render:</span></span><br></pre></td></tr></table></figure>
+
+<p>それを masterブランチかgh-pagesブランチにプッシュして、設定で変更すればそのまま公開することができます。</p>
+<p>しかし、僕のサイトのような<code>{username}.github.io</code>というリポジトリでは上の方法が使えません。何故か、先程のようなリポジトリ名ではmasterブランチに直接静的ファイルを置かないとGithub Pagesを使えないらしいのです。</p>
+<p>したがって、僕はこの理不尽な仕様に対応するためにちょっとしたコードを書きました。このときに得た知見をブログで共有しようかなと思います。もし、hexoとGithub Pagesで自分のサイトを運用したいなという人がいれば、参考にしていただけると幸いです。</p>
+<h2 id="解決策を書く前に"><a href="#解決策を書く前に" class="headerlink" title="解決策を書く前に"></a>解決策を書く前に</h2><p>実は上の仕様は以下の簡単なステップで回避することができます。しかし以下の方法には少しだけ欠点があります。<br><code>hexo deploy</code>とはhexoのウェブページをデプロイするための機能です。今回は <code>_config.yml</code> の該当箇所を以下のように直せば動かすことができます。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&#123;your</span> <span class="string">github</span> <span class="string">name&#125;/&#123;your</span> <span class="string">github</span> <span class="string">name&#125;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>これを書いた後、 <code>hexo deploy</code>と入力することで、Githubのmasterブランチに静的ファイルをプッシュしてくれます。この問題点としては、つまりマークダウンファイルなどのhexoに関係する設定ファイルをGitに残すことができないということです。僕としてはこれは結構辛い問題で、hexoの設定ファイルのバックアップが取れないのでもしものときに設定ファイルを引き継ぐことができません。</p>
+<p>おそらく賢い人なら「じゃあ、masterブランチにdeployをしておいて、他のブランチでバックアップを取っておけばいいじゃん」ってなると思います。そうです。つまりウェブページを公開する用とソースコードを管理する用のブランチを分けてしまおうというわけです。これなら、バックアップも取れます。しかし、これだとバックアップとデプロイをいちいちやらないと行けなくなります。これは結構面倒でデプロイを忘れたりしてしまうことが頻発してしまいそうです。そこで、僕はバックアップをしたら自動でデプロイをするような仕組みを作成しました。(無料です。)</p>
+<h2 id="ではやっと解決策"><a href="#ではやっと解決策" class="headerlink" title="ではやっと解決策"></a>ではやっと解決策</h2><p>今回のやり方は以下の記事を参考にしました。僕の説明が不十分だと感じたら以下の記事を見てみてください。</p>
+<ul>
+<li><a href="https://hexo.io/docs/github-pages.html" target="_blank" rel="noopener">Hexo io: GitHub Pages</a></li>
+<li><a href="https://qiita.com/koyayashi/items/13d4ac3a4d84d40b4690" target="_blank" rel="noopener">Travis-CIの自動デプロイでSSHを実行する方法 [翻訳]</a></li>
+</ul>
+<p>ではやっと本題へ。</p>
+<p>今回の方針としては、masterブランチとは別に deployブランチというものを用意してそのブランチへプッシュされたら、Travis CIで <code>hexo deploy</code>を実行するという単純なものです。</p>
+<p><code>hexo deploy</code>の設定については先程の <a href="#解決策を書く前に"><code>hexo deploy</code>を使う</a>通りに <code>_config.yml</code> を変更してください。</p>
+<h3 id="Travis-CIの設定"><a href="#Travis-CIの設定" class="headerlink" title="Travis CIの設定"></a>Travis CIの設定</h3><p>Travis CIの設定については3つのステップがあります。</p>
+<ol>
+<li>masterブランチにプッシュするための公開鍵の用意</li>
+<li>travis CIで使うための秘密鍵の用意</li>
+<li>travis.ymlの設定</li>
+</ol>
+<p>これらを順に解説していきます。</p>
+<h4 id="masterブランチにプッシュするための公開鍵の用意"><a href="#masterブランチにプッシュするための公開鍵の用意" class="headerlink" title="masterブランチにプッシュするための公開鍵の用意"></a>masterブランチにプッシュするための公開鍵の用意</h4><p>まずはmasterブランチにプッシュするためのssh keyファイルを用意します。<br>以下のコマンドを {username}.github.ioディレクトリの下で実行してください。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -N &apos;&apos; -f deploy_key</span><br></pre></td></tr></table></figure>
+
+<p>これを実行することで、 <code>deploy_key</code>(秘密鍵)と <code>deploy_key.pub</code>(公開鍵)の2つができます。<br><strong>これらは間違ってコミットしないように <code>.gitignore</code>に登録しておきましょう。</strong><br>では、<code>deploy_key.pub</code>をGitHubに登録しましょう。</p>
+<p>まず、GitHubの{username}.github.ioの設定ページへ行ってください。そこに、 <code>Deploy Keys</code>というタブがあると思います。そこへ行って、<code>add deploy key</code>というボタンをクリックします。このフォームへ先程の<code>deploy_key.pub</code>の中身を登録します。必ず <code>Allow write access</code>にチェックをつけてください。</p>
+<p>さあ、これで公開鍵の登録は終了しました。<br>次にTravisの方で秘密鍵を使うための設定を行っていきます。</p>
+<h3 id="Travis-CIで使うための秘密鍵の用意"><a href="#Travis-CIで使うための秘密鍵の用意" class="headerlink" title="Travis CIで使うための秘密鍵の用意"></a>Travis CIで使うための秘密鍵の用意</h3><p>まずはtravisのCLIを導入していきます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gem install travis</span><br><span class="line"></span><br><span class="line"># Githubアカウントでログインする</span><br><span class="line">$ travis login</span><br></pre></td></tr></table></figure>
+
+<p>次に、先程作成した秘密鍵を暗号化し、travisに設定します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch .travis.yml &amp;&amp; travis encrypt-file ./deploy_key --add</span><br></pre></td></tr></table></figure>
+
+<p>これを実行すると <code>deploy_key.enc</code>ファイルと <code>.travis.yml</code>が作成されているのが分かると思います。<br>次に <code>.travis.yml</code>ファイルの中を見ると以下のようなコードが挿入されていると思います。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">before_install:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">openssl</span> <span class="string">aes-256-cbc</span> <span class="string">-K</span> <span class="string">$encrypted_77965d5bdd4d_key</span> <span class="string">-iv</span> <span class="string">$encrypted_77965d5bdd4d_iv</span></span><br><span class="line">  <span class="string">-in</span> <span class="string">deploy_key.enc</span> <span class="string">-out</span> <span class="string">./deploy_key</span> <span class="string">-d</span></span><br></pre></td></tr></table></figure>
+
+<p>これで秘密鍵の設定は完了しました。<br>** <code>deploy_key.enc</code>ファイルをGitで管理するということを忘れないでください。**<br>.encファイルは暗号化されているのでGithubにプッシュしても大丈夫です。<br>では最後にtravisの設定をしていきましょう。</p>
+<h3 id="travis-ymlの設定"><a href="#travis-ymlの設定" class="headerlink" title="travis.ymlの設定"></a>travis.ymlの設定</h3><p>.travis.ymlの設定は以下の通りです。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line"><span class="bullet">-</span> <span class="number">12</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line">  <span class="attr">only:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">deploy</span></span><br><span class="line"><span class="attr">before_install:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">openssl</span> <span class="string">aes-256-cbc</span> <span class="string">-K</span> <span class="string">$encrypted_77965d5bdd4d_key</span> <span class="string">-iv</span> <span class="string">$encrypted_77965d5bdd4d_iv</span></span><br><span class="line">  <span class="string">-in</span> <span class="string">deploy_key.enc</span> <span class="string">-out</span> <span class="string">./deploy_key</span> <span class="string">-d</span> <span class="comment">### ここは先程のコードです。</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">eval</span> <span class="string">"$(ssh-agent -s)"</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">chmod</span> <span class="number">600</span> <span class="string">./deploy_key</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">echo</span> <span class="string">-e</span> <span class="string">"Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n"</span> <span class="string">&gt;&gt;</span> <span class="string">~/.ssh/config</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">ssh-add</span> <span class="string">./deploy_key</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo</span> <span class="string">generate</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure>
+
+<p>これらの簡単な解説をします。<br><code>branches:</code> はどのブランチでこのtravisを実行するかを設定しています。今回の場合は <code>deploy</code>ブランチにプッシュされた場合にのみmasterへデプロイするという宣言を行っています。</p>
+<p>次に <code>before_install</code> についてです。このコードはsshキーの設定を行っています。最初の <code>openssl ....</code>は先程作成した <code>deploy_key.enc</code>を復号化するためのコマンドです。それ以下では復号した <code>deploy_key</code>をsshキーとして使う設定を行っています。<br><code>before_install</code>は以下の <code>script</code>の前に実行されます。</p>
+<p>最後に <code>script</code>についてです。といってもこれについては解説する意味もなさそうですね。笑<br>ただ、hemlにコンパイルを行い、それらをdeployするだけです。</p>
+<h2 id="自動デプロイしてみる"><a href="#自動デプロイしてみる" class="headerlink" title="自動デプロイしてみる"></a>自動デプロイしてみる</h2><p>それではここまでが終わったら、<code>deploy</code>ブランチにプッシュしてみましょう。<br>そうすると <a href="https://travis-ci.com/" target="_blank" rel="noopener">travis</a>のページを確認するとCIが走っているのが確認出来ると思います。<br>もし、ログインしていない場合は travisにGithubアカウントでログインしてみましょう。</p>
+<p>もし、CIがうまくはしればmasterにデプロイが完了しているはずです。<br>お疲れさまです。</p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>今回は自分がこのブログを構築するためにした設定についてのブログを書いてみました。<br>もし、読んでいる人の参考になればとても嬉しいです。</p>
+<h2 id="もしバグが起こった場合"><a href="#もしバグが起こった場合" class="headerlink" title="もしバグが起こった場合"></a>もしバグが起こった場合</h2><p>Travisで以下のようなエラーが起った場合についてです。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iv undefined</span><br><span class="line">The command &quot;openssl aes-256-cbc -K $encrypted_77965d5bdd4d_key -iv $encrypted_77965d5bdd4d_iv -in deploy_key.enc -out ./deploy_key -d&quot; failed and exited with 1 during .</span><br></pre></td></tr></table></figure>
+
+<p>これについては<a href="https://github.com/travis-ci/travis.rb/issues/607" target="_blank" rel="noopener">このissue</a>が参考になりました。<br>僕の場合の解決方法です。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ travis encrypt-file ./deploy_key --pro</span><br></pre></td></tr></table></figure>
+
+<p>これを実行したときに出てくる <code>openssl ...</code> をtravis.ymlの同じ部分を置き換えて、新しくできた <code>deploy_key.enc</code> と一緒にプッシュしてみましょう。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kitagry.github.io/2019/11/03/hexo-setting/" data-id="ck3oj341x000bzqpg7ta97s67" class="article-share-link">共有</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github-Pages/" rel="tag">Github Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/travis/" rel="tag">travis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/09/go-learner-background/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          読書内容を覚えるためのライフハック作った
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">ブログ作ってみた</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/" rel="tag">Github Pages</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LSP/" rel="tag">LSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/travis/" rel="tag">travis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" rel="tag">ライフハック</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AA%AD%E6%9B%B8/" rel="tag">読書</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Github-Pages/" style="font-size: 10px;">Github Pages</a> <a href="/tags/LSP/" style="font-size: 10px;">LSP</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/travis/" style="font-size: 10px;">travis</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/%E3%83%A9%E3%82%A4%E3%83%95%E3%83%8F%E3%83%83%E3%82%AF/" style="font-size: 10px;">ライフハック</a> <a href="/tags/%E8%AA%AD%E6%9B%B8/" style="font-size: 20px;">読書</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">2019/12</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">2019/11</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/02/read-book-2019-11/">2019/11 読んだ本まとめ</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/efm-langserver/">efm-langserverの設定について今更ながらやってみた(Go言語)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/09/go-learner-background/">読書内容を覚えるためのライフハック作った</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/hexo-setting/">hexoをGitHub Pagesで使うための設定</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/01/hello-world/">ブログ作ってみた</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Ryo Kitagawa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about/me.html" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
